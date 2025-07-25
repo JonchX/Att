@@ -73,9 +73,9 @@ def is_valid_public_ip(ip):
 # ajustado para 2 cores y 8GB RAM (nano 8.5 codespace)
 # Los métodos menos intensivos usan menos threads/paquetes.
 METHOD_CONFIG = {
-    "UDPPPS":        {"threads": 40,   "force": 4096},
-    "UDPPACKETS":    {"threads": 50,   "force": 8192},
-    "UDPKILL":       {"threads": 80,   "force": 10240},
+    "UDPPPS":        {"threads": 5,   "force": 1024},
+    "UDPPACKETS":    {"threads": 5,   "force": 1400},
+    "UDPKILL":       {"threads": 5,   "force": 2052},
     "UDP-GAME":      {"threads": 32,   "force": 3072},
     "MCPE":          {"threads": 24,   "force": 2048},
     "UDP-MIX":       {"threads": 60,   "force": 6144},
