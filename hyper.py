@@ -75,7 +75,7 @@ def is_valid_public_ip(ip):
 METHOD_CONFIG = {
     "UDPPPS":        {"threads": 5,   "force": 1024},
     "UDPPACKETS":    {"threads": 5,   "force": 1400},
-    "UDPKILL":       {"threads": 5,   "force": 2052},
+    "UDPKILL":       {"threads": 5,   "force": 2048},
     "UDP-GAME":      {"threads": 32,   "force": 3072},
     "MCPE":          {"threads": 24,   "force": 2048},
     "UDP-MIX":       {"threads": 60,   "force": 6144},
