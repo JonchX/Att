@@ -6,8 +6,8 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 
-#define SERVER_IP   "5.39.63.207"  // Cambia esto por la IP de destino
-#define SERVER_PORT 7502            // Cambia esto por el puerto de destino
+#define SERVER_IP   "46.105.222.228"  // Cambia esto por la IP de destino
+#define SERVER_PORT 53            // Cambia esto por el puerto de destino
 #define PACKET_SIZE 128              // Tamaño de los datos UDP enviados
 #define RUN_SECONDS 32               // Tiempo de ejecución en segundos
 
