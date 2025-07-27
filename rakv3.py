@@ -5,8 +5,8 @@ import threading
 import random
 
 # Configuración
-ip = "127.0.0.1"        # Cambia por la IP de tu servidor objetivo
-port = 19132            # Cambia por el puerto del servidor
+ip = "5.39.63.207"        # Cambia por la IP de tu servidor objetivo
+port = 7502            # Cambia por el puerto del servidor
 duration = 32           # Segundos
 threads = 8             # Número de hilos concurrentes
 
